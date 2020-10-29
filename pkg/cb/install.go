@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"reflect"
 
-	"cuelang.org/go/cue"
+	"github.com/anarcher/cue-bundler/pkg/cueutil"
 	"github.com/anarcher/cue-bundler/pkg/spec"
 	v1 "github.com/anarcher/cue-bundler/pkg/spec/v1"
 	"github.com/anarcher/cue-bundler/pkg/spec/v1/deps"
@@ -63,17 +63,7 @@ func writeChangedConfigFile(oldcfg v1.Config, cfg v1.Config, path string) error 
 		return nil
 	}
 
-	var r cue.Runtime
-	inst, err := r.Compile("cfg", "")
-	if err != nil {
-		return err
-	}
-	inst, err = inst.Fill(cfg)
-	if err != nil {
-		return err
-	}
-
-	bs, err := r.Marshal(inst)
+	bs, err := cueutil.Marshal(cfg)
 	if err != nil {
 		return err
 	}
