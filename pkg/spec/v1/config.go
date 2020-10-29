@@ -6,7 +6,7 @@ const Version = "v1"
 
 type Config struct {
 	Version      string                     `json:"version"`
-	Dependencies map[string]deps.Dependency `json:"dependencies"`
+	Dependencies map[string]deps.Dependency `json:"dependencies,omitempty"`
 }
 
 func New() Config {

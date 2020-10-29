@@ -21,7 +21,7 @@ func Marshal(v interface{}) ([]byte, error) {
 	}
 
 	syn := []cue.Option{
-		//cue.Final(),
+		cue.Final(),
 		cue.Docs(true),
 		cue.Definitions(true),
 		cue.Attributes(true),

@@ -16,5 +16,6 @@ func rootCmd() *cobra.Command {
 
 	cmd.AddCommand(initCmd(cueModDir))
 	cmd.AddCommand(installCmd(cueModDir))
+	cmd.AddCommand(updateCmd(cueModDir))
 	return cmd
 }

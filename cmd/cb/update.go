@@ -8,11 +8,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func installCmd(modDir string) *cobra.Command {
+func updateCmd(modDir string) *cobra.Command {
 	c := &cobra.Command{
-		Use:     "install [<uris>...]",
-		Aliases: []string{"i"},
-		Short:   "Install new dependencies. Existing ones are silently skipped",
+		Use:     "update [<uris>...]",
+		Aliases: []string{"u"},
+		Short:   "Update all or specific dependencies",
 	}
 
 	c.Run = func(cmd *cobra.Command, args []string) {
@@ -20,9 +20,8 @@ func installCmd(modDir string) *cobra.Command {
 			fmt.Println("cue.mod not found")
 			os.Exit(1)
 		}
-
 		uris := args
-		if err := cb.Install(modDir, uris); err != nil {
+		if err := cb.Update(modDir, uris); err != nil {
 			fmt.Printf("error: %s\n", err)
 			os.Exit(1)
 		}
