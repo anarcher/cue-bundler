@@ -62,7 +62,7 @@ func ensure(direct map[string]deps.Dependency, vendorDir string, locks map[strin
 		if d.Single {
 			continue
 		}
-		f, err := spec.Load(filepath.Join(vendorDir, d.Name(), spec.ConfigFile))
+		f, err := spec.Load(filepath.Join(vendorDir, d.Name(), "cue.mod", spec.ConfigFile))
 		if err != nil {
 			if os.IsNotExist(err) {
 				continue

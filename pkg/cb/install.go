@@ -22,7 +22,7 @@ func Install(modDir string, uris []string) error {
 	oldloaded := l.Clone()
 
 	//TODO(anarcher):
-	if err := os.MkdirAll(filepath.Join(modDir, ".tmp"), os.ModePerm); err != nil {
+	if err := os.MkdirAll(filepath.Join(modDir, "pkg", ".tmp"), os.ModePerm); err != nil {
 		return err
 	}
 
@@ -50,7 +50,7 @@ func Install(modDir string, uris []string) error {
 		return err
 	}
 	fmt.Println("updating cb.cue")
-	if err := writeChangedConfigFile(oldloaded.lock, v1.Config{Dependencies: locked}, filepath.Join(modDir, spec.ConfigLockFile)); err != nil {
+	if err := writeChangedConfigFile(oldloaded.lock, v1.Config{Version: v1.Version, Dependencies: locked}, filepath.Join(modDir, spec.ConfigLockFile)); err != nil {
 		return err
 	}
 	fmt.Println("updating cb.lock.cue")

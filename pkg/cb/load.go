@@ -3,6 +3,8 @@ package cb
 import (
 	"path/filepath"
 
+	"github.com/jinzhu/copier"
+
 	"github.com/anarcher/cue-bundler/pkg/spec"
 	v1 "github.com/anarcher/cue-bundler/pkg/spec/v1"
 )
@@ -32,11 +34,9 @@ func load(modDir string) (*loaded, error) {
 	return c, nil
 }
 
-func (l loaded) Clone() *loaded {
-	n := &loaded{
-		modDir: l.modDir,
-		cfg:    l.cfg,
-		lock:   l.lock,
-	}
+func (l *loaded) Clone() *loaded {
+	n := &loaded{}
+	_ = copier.Copy(n, l)
+
 	return n
 }

@@ -24,12 +24,12 @@ func FindModDirPath() (path string) {
 	}
 
 	stop := "/"
-	modDir, err := findParentFile(ModDir, pwd, stop)
+	dir, err := findParentFile(ModDir, pwd, stop)
 	if err != nil {
 		return ""
 	}
 
-	return modDir
+	return filepath.Join(dir, ModDir)
 }
 
 func findParentFile(file, start, stop string) (string, error) {
