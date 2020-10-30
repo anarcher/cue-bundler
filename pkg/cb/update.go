@@ -45,7 +45,7 @@ func Update(modDir string, uris []string) error {
 	}
 
 	// write
-	if err := writeChangedConfigFile(oldloaded.lock, v1.Config{Version: v1.Version, Dependencies: locked}, filepath.Join(modDir, spec.ConfigLockFile)); err != nil {
+	if err := WriteChangedConfigFile(oldloaded.lock, v1.Config{Version: v1.Version, Dependencies: locked}, filepath.Join(modDir, spec.ConfigLockFile)); err != nil {
 		return err
 	}
 

@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/anarcher/cue-bundler/pkg/cb"
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -23,9 +24,10 @@ func installCmd(modDir string) *cobra.Command {
 
 		uris := args
 		if err := cb.Install(modDir, uris); err != nil {
-			fmt.Printf("error: %s\n", err)
+			fmt.Println(color.RedString("error:"), err)
 			os.Exit(1)
 		}
+		fmt.Println(color.GreenString("success:"), "installed packages")
 	}
 
 	return c

@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/anarcher/cue-bundler/pkg/cb"
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -22,9 +23,10 @@ func updateCmd(modDir string) *cobra.Command {
 		}
 		uris := args
 		if err := cb.Update(modDir, uris); err != nil {
-			fmt.Printf("error: %s\n", err)
+			fmt.Println(color.RedString("error:"), err)
 			os.Exit(1)
 		}
+		fmt.Println(color.GreenString("success:"), "updated packages")
 	}
 
 	return c

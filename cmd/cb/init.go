@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/anarcher/cue-bundler/pkg/cb"
+	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -20,10 +21,10 @@ func initCmd(modDir string) *cobra.Command {
 		}
 
 		if err := cb.Init(modDir); err != nil {
-			fmt.Printf("error: %s\n", err)
+			fmt.Println(color.RedString("error:"), err)
 			os.Exit(1)
 		}
-		fmt.Println("success: init config cue files")
+		fmt.Println(color.GreenString("success:"), "init config cue files")
 	}
 	return c
 }

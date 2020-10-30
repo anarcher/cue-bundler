@@ -46,19 +46,17 @@ func Install(modDir string, uris []string) error {
 	}
 
 	// write Cfg and Lock
-	if err := writeChangedConfigFile(oldloaded.cfg, l.cfg, filepath.Join(modDir, spec.ConfigFile)); err != nil {
+	if err := WriteChangedConfigFile(oldloaded.cfg, l.cfg, filepath.Join(modDir, spec.ConfigFile)); err != nil {
 		return err
 	}
-	fmt.Println("updating cb.cue")
-	if err := writeChangedConfigFile(oldloaded.lock, v1.Config{Version: v1.Version, Dependencies: locked}, filepath.Join(modDir, spec.ConfigLockFile)); err != nil {
+	if err := WriteChangedConfigFile(oldloaded.lock, v1.Config{Version: v1.Version, Dependencies: locked}, filepath.Join(modDir, spec.ConfigLockFile)); err != nil {
 		return err
 	}
-	fmt.Println("updating cb.lock.cue")
 
 	return nil
 }
 
-func writeChangedConfigFile(oldcfg v1.Config, cfg v1.Config, path string) error {
+func WriteChangedConfigFile(oldcfg v1.Config, cfg v1.Config, path string) error {
 	if reflect.DeepEqual(oldcfg, cfg) {
 		return nil
 	}
